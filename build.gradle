@@ -2,10 +2,12 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.0'
     id 'io.spring.dependency-management' version '1.1.5'
+    id "com.gorylenko.gradle-git-properties" version "2.4.1"
 }
 
 group = 'com.moreti'
 version = '0.0.1-SNAPSHOT'
+description = "Actuator Demo"
 
 java {
     sourceCompatibility = '17'
@@ -26,4 +28,15 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+springBoot {
+    buildInfo{
+        properties {
+            additional = [
+                    'description': project.description,
+                    'springboot.version': '3.3.0'
+            ]
+        }
+    }
 }
